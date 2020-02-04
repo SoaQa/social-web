@@ -24,7 +24,7 @@
         </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>ru.star_network</param-value>
+            <param-value>ru.starry_sky</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>

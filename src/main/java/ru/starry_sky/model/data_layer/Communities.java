@@ -1,18 +1,16 @@
 package ru.starry_sky.model.data_layer;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
+
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
-@Setter
-@Getter
+@Data
 public class Communities {
-    public Communities() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "community_id")
@@ -23,4 +21,8 @@ public class Communities {
 
     @Column(name = "age_limit")
     private int ageLimit;
+
+    @JsonBackReference
+    @ManyToMany(mappedBy = "communities")
+    private List<User> users;
 }

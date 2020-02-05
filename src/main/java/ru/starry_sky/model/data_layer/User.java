@@ -1,33 +1,35 @@
 package ru.starry_sky.model.data_layer;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
+/**
+ * Таблица users
+ */
 @Entity
 @Table(name = "users")
-@Setter
-@Getter
+@Data
 public class User {
-
-    public User() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String login;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
     @Column
@@ -44,6 +46,59 @@ public class User {
     @Column
     private String gender;
 
-    @Column
+    @Column(nullable = false)
     private String email;
+
+
+    // ниже идут связи для хибернейта
+
+    @JsonIgnore
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "private_messages",
+            joinColumns = { @JoinColumn(name = "sender_id") },
+            inverseJoinColumns = { @JoinColumn(name = "recipient_id") }
+    )
+    private List<PrivateMessage> SentOutPrivateMessages;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "SentOutPrivateMessages")
+    private List<PrivateMessage> receivedPrivateMessage;
+
+
+    @JsonIgnore
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "wall_messages",
+            joinColumns = { @JoinColumn(name = "sender_id") },
+            inverseJoinColumns = { @JoinColumn(name = "recipient_id") }
+    )
+    private List<WallMessage> SentOutWallMessages;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "SentOutWallMessages")
+    private List<WallMessage> receivedWallMessages;
+
+
+    @JsonManagedReference
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "user_communities",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "community_id") }
+    )
+    private List<Communities> communities;
+
+
+    @JsonManagedReference
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "friends",
+            joinColumns = { @JoinColumn(name = "requester") },
+            inverseJoinColumns = { @JoinColumn(name = "friend") }
+    )
+    private List<User> friendRequests;
+
+    @JsonBackReference
+    @ManyToMany(mappedBy = "friendRequests")
+    private List<User> friends;
+
 }

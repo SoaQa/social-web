@@ -52,7 +52,7 @@ public class User {
 
     // ниже идут связи для хибернейта
 
-    @JsonIgnore
+    @JsonManagedReference
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "private_messages",
             joinColumns = { @JoinColumn(name = "sender_id") },
@@ -60,12 +60,12 @@ public class User {
     )
     private List<PrivateMessage> SentOutPrivateMessages;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToMany(mappedBy = "SentOutPrivateMessages")
     private List<PrivateMessage> receivedPrivateMessage;
 
 
-    @JsonIgnore
+    @JsonManagedReference
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "wall_messages",
             joinColumns = { @JoinColumn(name = "sender_id") },
@@ -73,7 +73,7 @@ public class User {
     )
     private List<WallMessage> SentOutWallMessages;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToMany(mappedBy = "SentOutWallMessages")
     private List<WallMessage> receivedWallMessages;
 

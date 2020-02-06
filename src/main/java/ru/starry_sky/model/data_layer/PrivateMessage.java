@@ -38,10 +38,12 @@ public class PrivateMessage {
     private String messageBody;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "sentOutPrivateMessages")
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
     private User sender;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "receivedPrivateMessages")
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false, insertable = false, updatable = false)
     private User recipient;
 }

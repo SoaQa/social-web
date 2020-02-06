@@ -1,7 +1,6 @@
 package ru.starry_sky.model.data_layer;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -53,28 +52,22 @@ public class User {
     // ниже идут связи для хибернейта
 
     @JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_id", nullable = false)
+    @OneToMany(mappedBy = "sender",fetch = FetchType.LAZY)
     private List<PrivateMessage> sentOutPrivateMessages;
 
 
     @JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "recipient_id", nullable = false)
+    @OneToMany(mappedBy = "recipient",fetch = FetchType.LAZY)
     private List<PrivateMessage> receivedPrivateMessages;
 
 
-
-
     @JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_id", nullable = false)
+    @OneToMany(mappedBy = "sender",fetch = FetchType.LAZY)
     private List<WallMessage> sentOutWallMessages;
 
 
     @JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "recipient_id", nullable = false)
+    @OneToMany(mappedBy = "recipient",fetch = FetchType.LAZY)
     private List<WallMessage> receivedWallMessages;
 
 

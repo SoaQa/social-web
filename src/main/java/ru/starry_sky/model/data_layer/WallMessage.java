@@ -35,10 +35,12 @@ public class WallMessage {
     private String messageBody;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "sentOutWallMessages")
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
     private User sender;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "receivedWallMessages")
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false, insertable = false, updatable = false)
     private User recipient;
 }

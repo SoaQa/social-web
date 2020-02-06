@@ -10,9 +10,9 @@ import java.io.Serializable;
 @Data
 public class FriendsPK implements Serializable {
 
-    @Column(name="user_id1")
-    private Long UserID1;
+    @Column(name="requester")
+    private Long requester;
 
-    @Column(name = "user_id2")
-    private Long UserID2;
+    @Column(name = "friend")
+    private Long friend;
 }

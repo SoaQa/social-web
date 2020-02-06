@@ -4,9 +4,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ru.senla_final</groupId>
-	<artifactId>social-web</artifactId>
+	<artifactId>starry_sky</artifactId>
 	<packaging>war</packaging>
-	<name>star_network</name>
+	<name>starry_sky</name>
 	<version>1.0</version>
 	<properties>
 		<java.version>8</java.version>
@@ -18,7 +18,7 @@
 
 
 	<build>
-		<finalName>star_network</finalName>
+		<finalName>starry_sky</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

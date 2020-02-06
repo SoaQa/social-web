@@ -1,5 +1,6 @@
 package ru.starry_sky.model.data_layer;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -32,4 +33,12 @@ public class WallMessage {
 
     @Column(name = "message_body")
     private String messageBody;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "sentOutWallMessages")
+    private User sender;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "receivedWallMessages")
+    private User recipient;
 }

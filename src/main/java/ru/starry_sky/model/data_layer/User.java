@@ -53,29 +53,30 @@ public class User {
     // ниже идут связи для хибернейта
 
     @JsonManagedReference
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "private_messages",
-            joinColumns = { @JoinColumn(name = "sender_id") },
-            inverseJoinColumns = { @JoinColumn(name = "recipient_id") }
-    )
-    private List<PrivateMessage> SentOutPrivateMessages;
-
-    @JsonBackReference
-    @ManyToMany(mappedBy = "SentOutPrivateMessages")
-    private List<PrivateMessage> receivedPrivateMessage;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id", nullable = false)
+    private List<PrivateMessage> sentOutPrivateMessages;
 
 
     @JsonManagedReference
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "wall_messages",
-            joinColumns = { @JoinColumn(name = "sender_id") },
-            inverseJoinColumns = { @JoinColumn(name = "recipient_id") }
-    )
-    private List<WallMessage> SentOutWallMessages;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipient_id", nullable = false)
+    private List<PrivateMessage> receivedPrivateMessages;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "SentOutWallMessages")
+
+
+
+    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id", nullable = false)
+    private List<WallMessage> sentOutWallMessages;
+
+
+    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipient_id", nullable = false)
     private List<WallMessage> receivedWallMessages;
+
 
 
     @JsonManagedReference

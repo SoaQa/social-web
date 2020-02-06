@@ -89,17 +89,23 @@ public class User {
     private List<Communities> communities;
 
 
-    @JsonManagedReference
+    @JsonBackReference
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "friends",
             joinColumns = { @JoinColumn(name = "requester") },
             inverseJoinColumns = { @JoinColumn(name = "friend") }
     )
-    private List<User> friendRequests;
+    private List<User> requester;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "friendRequests")
-    private List<User> friends;
+
+    @JsonManagedReference
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "friends",
+            joinColumns = { @JoinColumn(name = "friend") },
+            inverseJoinColumns = { @JoinColumn(name = "requester") }
+    )
+    private List<User> friend;
 
 }

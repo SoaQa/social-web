@@ -23,5 +23,8 @@ public class TestHibernate {
         User user = session.get(User.class, id);
         System.out.println(user);
 
+        UserDao userDao = applicationContext.getBean(UserDaoImpl.class);
+        System.out.println(userDao.getByID((long) 1));
+
     }
 }

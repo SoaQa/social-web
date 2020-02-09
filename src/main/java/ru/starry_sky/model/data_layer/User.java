@@ -1,6 +1,5 @@
 package ru.starry_sky.model.data_layer;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -17,9 +16,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * Таблица users
- */
+
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
@@ -56,7 +53,6 @@ public class User {
     @Column
     private String email;
 
-    // Поскольку toString ломбока вызывает рекурсию сделаем свой
 
     @Override
     public String toString(){
@@ -65,22 +61,22 @@ public class User {
 
     // ниже идут связи для хибернейта
     @JsonManagedReference
-    @OneToMany(mappedBy = "sender",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sender",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PrivateMessage> sentOutPrivateMessages;
 
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "recipient",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "recipient",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PrivateMessage> receivedPrivateMessages;
 
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "sender",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sender",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<WallMessage> sentOutWallMessages;
 
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "recipient",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "recipient",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<WallMessage> receivedWallMessages;
 
 
@@ -92,7 +88,7 @@ public class User {
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "community_id") }
     )
-    private List<Communities> communities;
+    private List<Community> communities;
 
 
 

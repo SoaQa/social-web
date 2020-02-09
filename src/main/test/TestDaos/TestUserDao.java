@@ -1,13 +1,12 @@
+package TestDaos;
+
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.starry_sky.AppConfig;
-import ru.starry_sky.HibernateConfig;
 import ru.starry_sky.dao.UserDaoImpl;
-import ru.starry_sky.dao.interfases.FriendsDao;
 import ru.starry_sky.dao.interfases.UserDao;
-import ru.starry_sky.model.data_layer.Friends;
 import ru.starry_sky.model.data_layer.User;
-import ru.starry_sky.model.data_layer.embedded_keys.FriendsPK;
+
 
 
 public class TestUserDao {
@@ -29,6 +28,10 @@ public class TestUserDao {
 
     @Test
     public void getUserByID(){
+        User user = userDao.getByID((long) 7);
+        System.out.println(user.getLogin());
+        System.out.println( user.getFriend());
+        System.out.println(user.getRequester());
 
     }
 }

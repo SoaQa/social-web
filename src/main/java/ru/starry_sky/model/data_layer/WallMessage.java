@@ -55,5 +55,5 @@ public class WallMessage {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "wallMessage")
-    private List<WallMessagesComments> comments;
+    private List<WallMessagesComment> comments;
 }

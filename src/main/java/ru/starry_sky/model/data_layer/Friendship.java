@@ -1,8 +1,9 @@
 package ru.starry_sky.model.data_layer;
 
 import lombok.*;
-import ru.starry_sky.model.data_layer.embedded_keys.UsersCommunitiesPK;
+import ru.starry_sky.model.data_layer.embedded_keys.FriendsPK;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,7 +14,12 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserCommunities {
+public class Friendship {
+
     @EmbeddedId
-    private UsersCommunitiesPK id;
+    private FriendsPK id;
+
+    @Column(name = "accept")
+    private boolean accept;
+
 }

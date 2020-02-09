@@ -8,7 +8,7 @@ import ru.starry_sky.dao.FriendsDaoImpl;
 import ru.starry_sky.dao.UserDaoImpl;
 import ru.starry_sky.dao.interfases.FriendsDao;
 import ru.starry_sky.dao.interfases.UserDao;
-import ru.starry_sky.model.data_layer.Friends;
+import ru.starry_sky.model.data_layer.Friendship;
 import ru.starry_sky.model.data_layer.User;
 
 @Configuration
@@ -25,7 +25,7 @@ public class AppConfig {
     @Bean
     public FriendsDao friendsDaoImpl(){
         FriendsDao friendsDao = new FriendsDaoImpl();
-        friendsDao.setGenericClass(Friends.class);
+        friendsDao.setGenericClass(Friendship.class);
         return friendsDao;
     }
 

@@ -1,6 +1,5 @@
 package ru.starry_sky.model.data_layer;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

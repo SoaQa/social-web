@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table
 @Data
-public class Communities {
+public class Community {
     @Id
     @SequenceGenerator(name = "communitiesSequence", sequenceName = "communities_seq_pk", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "communitiesSequence")

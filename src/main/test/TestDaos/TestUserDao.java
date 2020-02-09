@@ -20,7 +20,7 @@ public class TestUserDao {
         User user = new User();
 
         user.setEmail("email@mail.ru");
-        user.setLogin("Valera");
+        user.setLogin("Soaqa");
         user.setPassword("123sdd321");
 
         userDao.save(user);

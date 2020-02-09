@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "users_communities")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

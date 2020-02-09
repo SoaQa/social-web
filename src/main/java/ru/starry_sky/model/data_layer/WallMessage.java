@@ -45,12 +45,12 @@ public class WallMessage {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name="sender_id", insertable = false, updatable = false)
     private User sender;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false, insertable = false, updatable = false)
+    @JoinColumn(name="recipient_id", nullable=false, insertable = false, updatable = false)
     private User recipient;
 
     @JsonManagedReference

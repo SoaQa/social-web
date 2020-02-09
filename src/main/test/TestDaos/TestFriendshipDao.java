@@ -19,7 +19,7 @@ public class TestFriendshipDao {
     public void beginFriendship(){
         Friendship friendship = new Friendship();
         FriendsPK friendsPK = new FriendsPK();
-        friendsPK.setFriend((long) 7);
+        friendsPK.setFriend((long) 2);
         friendsPK.setRequester((long) 1);
         friendship.setId(friendsPK);
         friendship.setAccept(true);

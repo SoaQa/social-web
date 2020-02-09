@@ -13,11 +13,12 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "wall_messages")
+@Table(name = "private_messages")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class PrivateMessage {
 
 
@@ -43,11 +44,11 @@ public class PrivateMessage {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name="sender_id", insertable = false, updatable = false)
     private User sender;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false, insertable = false, updatable = false)
+    @JoinColumn(name="recipient_id", insertable = false, updatable = false)
     private User recipient;
 }

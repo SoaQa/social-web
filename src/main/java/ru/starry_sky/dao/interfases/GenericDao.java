@@ -10,5 +10,6 @@ public interface GenericDao<T, PK extends Serializable> {
     T getByID(PK id);
     PK removeByID(PK id);
     void merge(T o);
+    void save(T o);
 }
 

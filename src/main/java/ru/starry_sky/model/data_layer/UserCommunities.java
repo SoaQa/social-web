@@ -1,6 +1,6 @@
 package ru.starry_sky.model.data_layer;
 
-import lombok.Data;
+import lombok.*;
 import ru.starry_sky.model.data_layer.embedded_keys.UsersCommunitiesPK;
 
 import javax.persistence.EmbeddedId;
@@ -9,7 +9,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class UserCommunities {
     @EmbeddedId
     private UsersCommunitiesPK id;

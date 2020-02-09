@@ -82,4 +82,17 @@ abstract class GenericAbstractDaoImpl<T, PK extends Serializable> implements Gen
         }
     }
 
+    public void save(T o){
+        Session session = sessionFactory.openSession();
+        try{
+            session.beginTransaction();
+            session.save(o);
+            session.getTransaction().commit();
+        }catch (HibernateException e){
+            System.out.println(e.getMessage());
+            log.error(e.getMessage(), e.getStackTrace());
+            session.getTransaction().rollback();
+        }
+    }
+
 }

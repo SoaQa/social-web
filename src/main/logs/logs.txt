@@ -1,0 +1,27 @@
+2020-02-09 13:46:33 INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-02-09 13:46:33 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-02-09 13:46:34 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL9Dialect
+2020-02-09 13:46:35 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-02-09 13:46:35 WARN  SqlExceptionHelper:137 - SQL Error: 0, SQLState: 23505
+2020-02-09 13:46:35 ERROR SqlExceptionHelper:142 - ОШИБКА: повторяющееся значение ключа нарушает ограничение уникальности "UQ_users_login"
+  Подробности: Ключ "(login)=(Soaqazss)" уже существует.
+2020-02-09 13:50:04 INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-02-09 13:50:04 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-02-09 13:50:04 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL9Dialect
+2020-02-09 13:50:05 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-02-09 13:53:21 INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-02-09 13:53:21 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-02-09 13:53:22 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL9Dialect
+2020-02-09 13:53:22 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-02-09 13:54:21 INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-02-09 13:54:21 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-02-09 13:54:22 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL9Dialect
+2020-02-09 13:54:23 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-02-09 13:57:48 INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-02-09 13:57:48 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-02-09 13:57:49 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL9Dialect
+2020-02-09 13:57:49 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-02-09 14:13:58 INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-02-09 14:13:58 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-02-09 14:13:58 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL9Dialect
+2020-02-09 14:13:59 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]

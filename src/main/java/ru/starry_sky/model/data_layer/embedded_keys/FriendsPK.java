@@ -15,4 +15,5 @@ public class FriendsPK implements Serializable {
 
     @Column(name = "friend")
     private Long friend;
+
 }

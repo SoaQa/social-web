@@ -12,7 +12,8 @@ import java.util.List;
 @Data
 public class Communities {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "communitiesSequence", sequenceName = "communities_seq_pk", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "communitiesSequence")
     @Column(name = "community_id")
     private Long id;
 

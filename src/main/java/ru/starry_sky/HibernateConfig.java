@@ -21,7 +21,6 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan
 @PropertySource(value = { "classpath:application.properties" })
 public class HibernateConfig implements TransactionManagementConfigurer {
 

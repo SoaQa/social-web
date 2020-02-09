@@ -1,7 +1,6 @@
 package ru.starry_sky.model.data_layer;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -13,21 +12,22 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "wall_messages")
+@Table(name = "wall_messages_comments")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class WallMessage {
-
+public class WallMessagesComments {
     @Id
+    @Column(name = "comment_id")
     @SequenceGenerator(name = "messagesSequence", sequenceName = "all_messages_seq_pk", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "messagesSequence")
+    private Long commentID;
+
     @Column(name = "message_id")
-    private Long id;
+    private Long messageID;
 
     @Column(name = "send_time")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -37,23 +37,13 @@ public class WallMessage {
     @Column(name = "sender_id")
     private Long senderID;
 
-    @Column(name = "recipient_id")
-    private Long recipientID;
-
     @Column(name = "message_body")
-    private String messageBody;
+    private String message_body;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
-    private User sender;
+    @JoinColumn(name="message_id", nullable=false, insertable = false, updatable = false)
+    private WallMessage wallMessage;
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name="user_id", nullable=false, insertable = false, updatable = false)
-    private User recipient;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "wallMessage")
-    private List<WallMessagesComments> comments;
 }

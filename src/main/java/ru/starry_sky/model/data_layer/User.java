@@ -6,7 +6,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 
 import javax.persistence.*;
@@ -18,10 +22,14 @@ import java.util.List;
  */
 @Entity
 @Table(name = "users")
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "usersSequence", sequenceName = "users_seq_pk", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usersSequence")
     @Column(name = "user_id")
     private Long id;
 
@@ -45,12 +53,17 @@ public class User {
     @Column
     private String gender;
 
-    @Column(nullable = false)
+    @Column
     private String email;
 
+    // Поскольку toString ломбока вызывает рекурсию сделаем свой
+
+    @Override
+    public String toString(){
+        return "UserID - " + this.id + ". User login - " + this.getLogin();
+    }
 
     // ниже идут связи для хибернейта
-
     @JsonManagedReference
     @OneToMany(mappedBy = "sender",fetch = FetchType.LAZY)
     private List<PrivateMessage> sentOutPrivateMessages;
@@ -82,7 +95,7 @@ public class User {
     private List<Communities> communities;
 
 
-    @JsonBackReference
+
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "friends",
@@ -92,13 +105,7 @@ public class User {
     private List<User> requester;
 
 
-    @JsonManagedReference
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "friends",
-            joinColumns = { @JoinColumn(name = "friend") },
-            inverseJoinColumns = { @JoinColumn(name = "requester") }
-    )
+    @ManyToMany(cascade = { CascadeType.ALL }, mappedBy = "requester")
     private List<User> friend;
 
 }

@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import ru.starry_sky.utils.Genders;
 
 
 import javax.persistence.*;
@@ -48,7 +48,7 @@ public class User {
     private LocalDate birthDate;
 
     @Column
-    private String gender;
+    private Genders gender;
 
     @Column
     private String email;
@@ -56,7 +56,7 @@ public class User {
 
     @Override
     public String toString(){
-        return "UserID - " + this.id + ". User login - " + this.getLogin();
+        return "UserID - " + this.id + ". User login - " + this.login;
     }
 
     // ниже идут связи для хибернейта

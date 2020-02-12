@@ -1,6 +1,6 @@
 package ru.starry_sky.dao.interfases;
 
-import ru.starry_sky.model.data_layer.WallMessagesComment;
+import ru.starry_sky.model.data_layer.WallMessageComment;
 
-public interface WallMessageCommentDao extends GenericDao<WallMessagesComment, Long> {
+public interface WallMessageCommentDao extends GenericDao<WallMessageComment, Long> {
 }

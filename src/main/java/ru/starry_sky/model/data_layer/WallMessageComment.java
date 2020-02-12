@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class WallMessagesComment {
+public class WallMessageComment {
     @Id
     @Column(name = "comment_id")
     @SequenceGenerator(name = "messagesSequence", sequenceName = "all_messages_seq_pk", allocationSize = 1)

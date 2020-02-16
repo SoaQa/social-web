@@ -1,4 +1,4 @@
-package ru.starry_sky.utils;
+package ru.starry_sky.utils.enums;
 
 
 public enum Genders {

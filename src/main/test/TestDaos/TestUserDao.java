@@ -15,7 +15,7 @@ public class TestUserDao {
     private UserDao userDao = applicationContext.getBean(UserDaoImpl.class);
 
 
-    @Test
+   // @Test
     public void createAndSaveNewUser(){
         User user = new User();
 
@@ -26,7 +26,7 @@ public class TestUserDao {
         userDao.save(user);
     }
 
-    @Test
+   // @Test
     public void getUserByID(){
         User user = userDao.getByID((long) 7);
         System.out.println(user.getLogin());

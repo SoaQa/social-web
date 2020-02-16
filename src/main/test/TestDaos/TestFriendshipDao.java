@@ -15,7 +15,7 @@ public class TestFriendshipDao {
     @Autowired
     private FriendsDao friendsDao = applicationContext.getBean(FriendsDao.class);
 
-    @Test
+    //@Test
     public void beginFriendship(){
         Friendship friendship = new Friendship();
         FriendsPK friendsPK = new FriendsPK();

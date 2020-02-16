@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.starry_sky.utils.Genders;
+import ru.starry_sky.utils.enums.Genders;
 
 
 import javax.persistence.*;

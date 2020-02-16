@@ -12,7 +12,7 @@ public class TestMessages {
     PrivateMessagesDao privateMessagesDao = applicationContext.getBean(PrivateMessagesDao.class);
     UserDao userDao = applicationContext.getBean(UserDao.class);
 
-    @Test
+   // @Test
     public void sendMessage(){
         PrivateMessage privateMessage = new PrivateMessage();
         privateMessage.setMessageBody("Hello world!");
@@ -21,7 +21,7 @@ public class TestMessages {
         privateMessagesDao.save(privateMessage);
     }
 
-    @Test
+   // @Test
     public void getUserMessages(){
         User user = userDao.getByID((long) 1);
         System.out.println(user.getSentOutPrivateMessages());
@@ -30,7 +30,7 @@ public class TestMessages {
         System.out.println(user.getReceivedWallMessages());
     }
 
-    @Test
+   // @Test
     public void getMessage(){
         System.out.println(privateMessagesDao.getByID((long) 2));
     }

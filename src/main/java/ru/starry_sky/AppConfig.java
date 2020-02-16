@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.starry_sky.dao.FriendsDaoImpl;
 import ru.starry_sky.dao.PrivateMessagesDaoImpl;
 import ru.starry_sky.dao.UserDaoImpl;
@@ -16,8 +19,9 @@ import ru.starry_sky.model.data_layer.User;
 
 @Configuration
 @ComponentScan
+@EnableWebMvc
 @TestPropertySource(locations="classpath:test.properties")
-public class AppConfig {
+public class AppConfig implements WebMvcConfigurer {
     @Bean
     public UserDao userDaoImpl(){
         UserDao userDao = new UserDaoImpl();
@@ -37,6 +41,11 @@ public class AppConfig {
         PrivateMessagesDao privateMessagesDao = new PrivateMessagesDaoImpl();
         privateMessagesDao.setGenericClass(PrivateMessage.class);
         return privateMessagesDao;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
 }

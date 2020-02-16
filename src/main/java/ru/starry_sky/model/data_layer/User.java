@@ -1,5 +1,6 @@
 package ru.starry_sky.model.data_layer;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -91,16 +92,16 @@ public class User {
     private List<Community> communities;
 
 
-
+    @JsonBackReference
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "friends",
+            name = "friendship",
             joinColumns = { @JoinColumn(name = "requester") },
             inverseJoinColumns = { @JoinColumn(name = "friend") }
     )
     private List<User> requester;
 
-
+   @JsonManagedReference
     @ManyToMany(cascade = { CascadeType.ALL }, mappedBy = "requester")
     private List<User> friend;
 

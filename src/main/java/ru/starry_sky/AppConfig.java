@@ -53,6 +53,13 @@ public class AppConfig implements WebMvcConfigurer {
         return wallMessagesDao;
     }
 
+    @Bean
+    public FriendsDao friendsDao(){
+        FriendsDao friendsDao = new FriendsDaoImpl();
+        friendsDao.setGenericClass(Friendship.class);
+        return friendsDao;
+    }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");

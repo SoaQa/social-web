@@ -2,17 +2,22 @@ package ru.starry_sky.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.starry_sky.dao.interfases.FriendsDao;
 import ru.starry_sky.dao.interfases.UserDao;
 import ru.starry_sky.model.data_layer.User;
 import ru.starry_sky.model.domain_layer.NewUser;
 import ru.starry_sky.services.interfaces.UserServices;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServicesImpl implements UserServices {
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
+
+    @Autowired
+    private FriendsDao friendsDao;
 
     public List<User> getUsers(){
         return userDao.getAllData();
@@ -31,5 +36,9 @@ public class UserServicesImpl implements UserServices {
         return userDao.getByID(id);
     }
 
+    public List<User> getUserFriends(Long id){
+        Set<Long> usersID = friendsDao.getFriendsIDSetByUserID(id);
+        return userDao.getUsersByIDSet(usersID);
+    }
 
 }

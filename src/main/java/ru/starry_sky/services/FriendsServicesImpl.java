@@ -5,14 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.starry_sky.dao.interfases.FriendsDao;
 import ru.starry_sky.model.data_layer.Friendship;
+import ru.starry_sky.model.data_layer.User;
 import ru.starry_sky.model.data_layer.embedded_keys.FriendsPK;
 import ru.starry_sky.services.interfaces.FriendsServices;
+
+import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
 public class FriendsServicesImpl implements FriendsServices {
     @Autowired
-    FriendsDao friendsDao;
+    private FriendsDao friendsDao;
 
     public boolean friendRequest(FriendsPK friendsPK){
         Friendship friendship = new Friendship();
@@ -27,5 +31,6 @@ public class FriendsServicesImpl implements FriendsServices {
         friendsDao.merge(friendship);
         return true;
     }
+
 
 }

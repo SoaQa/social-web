@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.starry_sky.dao.interfases.GenericDao;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
@@ -19,6 +21,9 @@ abstract class GenericAbstractDaoImpl<T, PK extends Serializable> implements Gen
 
     @Autowired
     protected SessionFactory sessionFactory;
+
+    @PersistenceContext
+    protected EntityManager entityManager;
 
     public void setGenericClass( Class< T > c ) {
         this.cl = c;

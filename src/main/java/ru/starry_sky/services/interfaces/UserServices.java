@@ -9,4 +9,5 @@ public interface UserServices {
     List<User> getUsers();
     boolean createUser(NewUser newUser);
     User getUser(Long id);
+    List<User> getUserFriends(Long id);
 }

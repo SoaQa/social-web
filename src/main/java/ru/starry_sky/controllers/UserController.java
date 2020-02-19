@@ -37,10 +37,16 @@ public class UserController {
         return userServices.getUser(id);
     }
 
-    @PostMapping(value = "/friends")
-    public boolean friendRequest(@RequestBody FriendsPK friendsPK){
-        return friendsServices.friendRequest(friendsPK);
+
+    @GetMapping(value = "/{id}/friends")
+    public List<User> getUserFriends(@PathVariable Long id){
+        return userServices.getUserFriends(id);
     }
+
+    //@PostMapping(value = "/friends")
+    //public boolean friendRequest(@RequestBody FriendsPK friendsPK){
+       // return friendsServices.friendRequest(friendsPK);
+  // }
 
     @PutMapping(value = "/friends/accept")
     boolean acceptFriendship(@RequestBody FriendsPK friendsPK){

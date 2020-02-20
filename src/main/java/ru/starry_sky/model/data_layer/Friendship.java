@@ -13,23 +13,29 @@ import javax.persistence.*;
 @Setter
 @NamedNativeQueries({
         @NamedNativeQuery(  name="getUserFriendsID",
-                            query = "select requester_id user_id " +
+                            query = "select requester user_id " +
                                     "from friendship " +
-                                    "where accepted " +
-                                    "and friend = :id " +
+                                    "where accept " +
+                                    "and friend = :id1 " +
                                     "union " +
                                     "select friend user_id " +
                                     "from friendship " +
-                                    "where accepted " +
-                                    "and requester = :id ",
-                            resultClass = Long.class),
+                                    "where accept " +
+                                    "and requester = :id2 ",
+                            resultClass = UserID.class,
+        resultSetMapping = "usersIDMapping"),
         @NamedNativeQuery(  name = "getUnAcceptedRequesters",
-                            query = "select requester_id " +
+                            query = "select requester user_id" +
                                     "from friendship " +
-                                    "where not accepted " +
+                                    "where not accept " +
                                     "and friend = :id",
-                            resultClass = Long.class)
+                            resultClass = UserID.class)
 })
+@SqlResultSetMapping(
+        name = "usersIDMapping",
+        entities = @EntityResult(
+                entityClass = UserID.class,
+                fields = {@FieldResult(name = "userID", column = "user_id")}))
 public class Friendship {
 
     @EmbeddedId

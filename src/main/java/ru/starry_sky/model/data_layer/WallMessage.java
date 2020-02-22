@@ -44,16 +44,21 @@ public class WallMessage {
     private String messageBody;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="sender_id", insertable = false, updatable = false)
     private User sender;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="recipient_id", nullable=false, insertable = false, updatable = false)
     private User recipient;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "wallMessage")
     private List<WallMessageComment> comments;
+
+    @PrePersist
+    private void preInsert(){
+        if (getSendTime() == null){setSendTime(LocalDateTime.now());}
+    }
 }

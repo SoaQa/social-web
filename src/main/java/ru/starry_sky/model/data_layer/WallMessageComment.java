@@ -41,7 +41,7 @@ public class WallMessageComment {
     private String message_body;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="message_id", nullable=false, insertable = false, updatable = false)
     private WallMessage wallMessage;
 

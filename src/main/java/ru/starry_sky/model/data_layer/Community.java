@@ -24,6 +24,6 @@ public class Community {
     private int ageLimit;
 
     @JsonBackReference
-    @ManyToMany(mappedBy = "communities")
+    @ManyToMany(mappedBy = "communities", fetch = FetchType.LAZY)
     private List<User> users;
 }

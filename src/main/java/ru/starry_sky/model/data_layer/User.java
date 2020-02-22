@@ -106,7 +106,7 @@ public class User {
 
 
     @JsonBackReference
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
     @JoinTable(
             name = "friendship",
             joinColumns = { @JoinColumn(name = "requester") },
@@ -118,4 +118,9 @@ public class User {
     @ManyToMany(cascade = { CascadeType.ALL }, mappedBy = "requester")
     private List<User> friend;
 
+   // проставим дефолтные значения
+    @PrePersist
+    private void preInsert(){
+        if(getStatus() == null){setStatus(Status.ACTIVE);}
+    }
 }

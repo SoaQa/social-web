@@ -43,12 +43,17 @@ public class PrivateMessage {
     private String messageBody;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="sender_id", insertable = false, updatable = false)
     private User sender;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="recipient_id", insertable = false, updatable = false)
     private User recipient;
+
+    @PrePersist
+    private void preInsert(){
+        if (getSendTime() == null){setSendTime(LocalDateTime.now());}
+    }
 }

@@ -43,4 +43,8 @@ public class UserServicesImpl implements UserServices {
         return userDao.getUsersByIDSet(usersID);
     }
 
+    public User getUserByLogin(String login){
+        return userDao.getUserByLogin(login);
+    }
+
 }

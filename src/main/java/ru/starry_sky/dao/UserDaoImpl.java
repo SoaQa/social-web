@@ -23,4 +23,14 @@ public class UserDaoImpl extends GenericAbstractDaoImpl<User, Long> implements U
         cq.select(root).where(root.get("id").in(usersID));
         return session.createQuery(cq).getResultList();
     }
+
+    public User getUserByLogin(String login){
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+
+        Root<User> root = cq.from(User.class);
+        cq.select(root).where(cb.equal(root.get("login"), login));
+        return session.createQuery(cq).getSingleResult();
+    }
 }

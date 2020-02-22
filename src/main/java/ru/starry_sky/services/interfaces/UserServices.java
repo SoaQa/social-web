@@ -10,4 +10,5 @@ public interface UserServices {
     boolean createUser(NewUser newUser);
     User getUser(Long id);
     List<User> getUserFriends(Long id);
+    User getUserByLogin(String login);
 }

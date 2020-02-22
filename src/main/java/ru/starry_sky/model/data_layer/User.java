@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.starry_sky.utils.enums.Genders;
+import ru.starry_sky.utils.enums.Status;
 
 
 import javax.persistence.*;
@@ -54,6 +55,9 @@ public class User {
     @Column
     private String email;
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Override
     public String toString(){
@@ -61,6 +65,15 @@ public class User {
     }
 
     // ниже идут связи для хибернейта
+    @JsonManagedReference
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id") }
+    )
+    private List<Role> roles;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "sender",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PrivateMessage> sentOutPrivateMessages;

@@ -1,14 +1,20 @@
 package ru.starry_sky.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.starry_sky.dao.RoleDaoImpl;
 import ru.starry_sky.dao.interfases.FriendsDao;
+import ru.starry_sky.dao.interfases.RoleDao;
 import ru.starry_sky.dao.interfases.UserDao;
+import ru.starry_sky.dao.interfases.UserRolesDao;
+import ru.starry_sky.model.data_layer.Role;
 import ru.starry_sky.model.data_layer.User;
 import ru.starry_sky.model.domain_layer.NewUser;
 import ru.starry_sky.services.interfaces.UserServices;
 import ru.starry_sky.utils.enums.Status;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -20,16 +26,30 @@ public class UserServicesImpl implements UserServices {
     @Autowired
     private FriendsDao friendsDao;
 
+    @Autowired
+    private UserRolesDao userRolesDao;
+
+    @Autowired
+    private RoleDao roleDao;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public List<User> getUsers(){
         return userDao.getAllData();
     }
 
     public boolean createUser(NewUser newUser){
         User user = new User();
+        List<Role> roles = new ArrayList<>();
+        Role role = roleDao.getRoleByName("user");
+        roles.add(role);
+
         user.setLogin(newUser.getLogin());
-        user.setPassword(newUser.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
         user.setEmail(newUser.getEmail());
         user.setStatus(Status.ACTIVE);
+        user.setRoles(roles);
         userDao.save(user);
         return true;
     }

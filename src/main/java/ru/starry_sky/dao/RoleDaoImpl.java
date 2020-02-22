@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 
+
 public class RoleDaoImpl extends GenericAbstractDaoImpl<Role, Long> implements RoleDao {
 
     @Override
@@ -20,6 +21,8 @@ public class RoleDaoImpl extends GenericAbstractDaoImpl<Role, Long> implements R
 
         Root<Role> root = cq.from(Role.class);
         cq.select(root).where(cb.equal(root.get("name"), name));
-        return session.createQuery(cq).getSingleResult();
+        Role role = session.createQuery(cq).getSingleResult();
+        session.close();
+        return role;
     }
 }

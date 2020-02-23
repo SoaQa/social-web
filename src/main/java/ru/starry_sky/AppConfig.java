@@ -3,6 +3,7 @@ package ru.starry_sky;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -14,6 +15,7 @@ import ru.starry_sky.model.data_layer.*;
 @Configuration
 @EnableWebMvc
 @ComponentScan
+@PropertySource(value = { "classpath:application.properties" })
 //@TestPropertySource(locations="classpath:test.properties")
 public class AppConfig implements WebMvcConfigurer {
 

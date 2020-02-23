@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component("myJwtTokenProvider")
+@Component
 public class JwtTokenProvider {
 
     @Value("${jwt.token.secret}")

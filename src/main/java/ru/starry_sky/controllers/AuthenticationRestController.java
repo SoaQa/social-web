@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/login")
+@RequestMapping(value = "/starry_sky/")
 @Slf4j
 public class AuthenticationRestController {
     @Autowired
@@ -30,7 +30,7 @@ public class AuthenticationRestController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping(value = "login")
     public ResponseEntity login(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
         try{
             String login = authenticatedRequestDTO.getLogin();

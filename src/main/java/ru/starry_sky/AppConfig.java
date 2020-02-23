@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -53,13 +52,6 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public UserRolesDao userRolesDao(){
-        UserRolesDao userRolesDao = new UserRolesDaoImpl();
-        userRolesDao.setGenericClass(UserRole.class);
-        return userRolesDao;
-    }
-
-    @Bean
     public RoleDao roleDao(){
         RoleDao roleDao = new RoleDaoImpl();
         roleDao.setGenericClass(Role.class);
@@ -70,6 +62,8 @@ public class AppConfig implements WebMvcConfigurer {
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

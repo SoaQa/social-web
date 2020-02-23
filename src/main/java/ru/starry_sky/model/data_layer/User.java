@@ -50,6 +50,7 @@ public class User {
     private LocalDate birthDate;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Genders gender;
 
     @Column

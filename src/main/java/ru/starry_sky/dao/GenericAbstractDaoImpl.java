@@ -37,6 +37,7 @@ abstract class GenericAbstractDaoImpl<T, PK extends Serializable> implements Gen
                 session.save(o);
             }
             session.getTransaction().commit();
+            log.info("{} objects saved", l.size());
         }catch (HibernateException e){
             System.out.println(e.getMessage());
             log.error(e.getMessage(), e.getStackTrace());
@@ -49,12 +50,21 @@ abstract class GenericAbstractDaoImpl<T, PK extends Serializable> implements Gen
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(this.cl);
         criteria.from(this.cl);
-        return session.createQuery(criteria).getResultList();
+        List<T> result = session.createQuery(criteria).getResultList();
+        log.info("{} objects found.", result.size());
+        return result;
     }
 
     public T getByID(PK id) {
         Session session = sessionFactory.openSession();
-        return session.get(this.cl, id);
+        T result = session.get(this.cl, id);
+        if (result == null){
+            log.info("Not found object with id - {}", id);
+        }
+        else{
+            log.info("Found object with id - {}", id);
+        }
+        return result;
     }
 
     public PK removeByID(PK id) {
@@ -62,9 +72,17 @@ abstract class GenericAbstractDaoImpl<T, PK extends Serializable> implements Gen
         try {
             session.beginTransaction();
             T ra = session.get(this.cl, id);
-            session.remove(ra);
-            session.getTransaction().commit();
-            return id;
+            if (ra != null) {
+                session.remove(ra);
+                session.getTransaction().commit();
+                log.info("Object with id - {} removed", id);
+                return id;
+            }
+            else{
+                log.info("Object with id - {} not found", id);
+                return null;
+            }
+
         }
         catch (HibernateException e){
             System.out.println(e.getMessage());
@@ -80,6 +98,7 @@ abstract class GenericAbstractDaoImpl<T, PK extends Serializable> implements Gen
             session.beginTransaction();
             session.merge(o);
             session.getTransaction().commit();
+            log.info("Object merged.");
         }catch (HibernateException e){
             System.out.println(e.getMessage());
             log.error(e.getMessage(), e.getStackTrace());
@@ -93,6 +112,7 @@ abstract class GenericAbstractDaoImpl<T, PK extends Serializable> implements Gen
             session.beginTransaction();
             session.save(o);
             session.getTransaction().commit();
+            log.info("object saved.");
         }catch (HibernateException e){
             System.out.println(e.getMessage());
             log.error(e.getMessage(), e.getStackTrace());

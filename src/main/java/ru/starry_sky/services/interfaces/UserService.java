@@ -5,7 +5,7 @@ import ru.starry_sky.model.domain_layer.NewUser;
 
 import java.util.List;
 
-public interface UserServices {
+public interface UserService {
     List<User> getUsers();
     boolean createUser(NewUser newUser);
     User getUser(Long id);

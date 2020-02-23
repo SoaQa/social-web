@@ -3,15 +3,13 @@ package ru.starry_sky.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.starry_sky.dao.RoleDaoImpl;
 import ru.starry_sky.dao.interfases.FriendsDao;
 import ru.starry_sky.dao.interfases.RoleDao;
 import ru.starry_sky.dao.interfases.UserDao;
-import ru.starry_sky.dao.interfases.UserRolesDao;
 import ru.starry_sky.model.data_layer.Role;
 import ru.starry_sky.model.data_layer.User;
 import ru.starry_sky.model.domain_layer.NewUser;
-import ru.starry_sky.services.interfaces.UserServices;
+import ru.starry_sky.services.interfaces.UserService;
 import ru.starry_sky.utils.enums.Status;
 
 import java.util.ArrayList;
@@ -19,15 +17,12 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class UserServicesImpl implements UserServices {
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
     @Autowired
     private FriendsDao friendsDao;
-
-    @Autowired
-    private UserRolesDao userRolesDao;
 
     @Autowired
     private RoleDao roleDao;

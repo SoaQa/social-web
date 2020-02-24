@@ -4,9 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.starry_sky.dao.interfases.CommunitiesDao;
 import ru.starry_sky.dao.interfases.FriendsDao;
 import ru.starry_sky.dao.interfases.RoleDao;
 import ru.starry_sky.dao.interfases.UserDao;
+import ru.starry_sky.model.data_layer.Community;
 import ru.starry_sky.model.data_layer.Role;
 import ru.starry_sky.model.data_layer.User;
 import ru.starry_sky.model.domain_layer.NewUser;
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleDao roleDao;
+
+    @Autowired
+    private CommunitiesDao communitiesDao;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -93,6 +98,16 @@ public class UserServiceImpl implements UserService {
 
     public List<User> findUserByName(String name){
         return userDao.findUserByName(name);
+    }
+
+    public boolean inToCommunity(Long userID, Long communityID){
+        User user = getUser(userID);
+        Community community = communitiesDao.getByID(communityID);
+        List<Community> communities = user.getCommunities();
+        communities.add(community);
+        user.setCommunities(communities);
+        userDao.merge(user);
+        return true;
     }
 
 }

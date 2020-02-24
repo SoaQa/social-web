@@ -62,6 +62,13 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    public CommunitiesDao CommunitiesDao(){
+        CommunitiesDao communitiesDao = new CommunitiesDaoImpl();
+        communitiesDao.setGenericClass(Community.class);
+        return communitiesDao;
+    }
+
+    @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }

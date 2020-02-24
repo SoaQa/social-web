@@ -29,7 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final static String USER_ENDPOINT = "/users/**";
 
     private final static String LOGIN_ENDPOINT = "/login/**";
+
     private final static String REGISTER_ENDPOINT = "/register/**";
+
+    private final static String COMMUNITIES_ENDPOINT = "/communities/**";
 
 
     @Bean
@@ -48,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(LOGIN_ENDPOINT, REGISTER_ENDPOINT).permitAll()
                 .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
-                .antMatchers(USER_ENDPOINT).hasRole("USER")
+                .antMatchers(ADMIN_ENDPOINT, USER_ENDPOINT, COMMUNITIES_ENDPOINT).hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JwtConfigure(jwtTokenProvider));

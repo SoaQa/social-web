@@ -14,4 +14,5 @@ public interface UserService {
     User getUserByLogin(String login);
     boolean updateUserInfo(Long id, UpdateUserProfileDTO dto);
     List<User> findUserByName(String name);
+    boolean inToCommunity(Long userID, Long communityID);
 }

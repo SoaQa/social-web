@@ -91,4 +91,8 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    public List<User> findUserByName(String name){
+        return userDao.findUserByName(name);
+    }
+
 }

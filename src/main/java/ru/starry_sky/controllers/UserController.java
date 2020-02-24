@@ -2,21 +2,12 @@ package ru.starry_sky.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
-import ru.starry_sky.model.data_layer.Friendship;
-import ru.starry_sky.model.data_layer.PrivateMessage;
 import ru.starry_sky.model.data_layer.User;
-import ru.starry_sky.model.data_layer.embedded_keys.FriendsPK;
-import ru.starry_sky.model.domain_layer.AcceptFriendshipDTO;
-import ru.starry_sky.model.domain_layer.LongID;
-import ru.starry_sky.model.domain_layer.PrivateMessageDTO;
 import ru.starry_sky.model.domain_layer.UpdateUserProfileDTO;
-import ru.starry_sky.services.interfaces.FriendsServices;
-import ru.starry_sky.services.interfaces.PrivateMessagesServices;
 import ru.starry_sky.services.interfaces.UserService;
 
 import java.util.List;
@@ -32,9 +23,6 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private PrivateMessagesServices privateMessagesServices;
 
     @GetMapping
     public List<User> getUsers(){
@@ -60,20 +48,11 @@ public class UserController {
 
     }
 
-
-    // Приватные сообщения
-
-    //получить все сообщения пользователя
-    @GetMapping(value = "/{id}/messages")
-    public List<PrivateMessage> getPrivateMessages(@PathVariable Long id){
-        return privateMessagesServices.getUserMessages(id);
+    @GetMapping("/find-user")
+    public List<User> findUserByName(@RequestParam String name){
+        return userService.findUserByName(name);
     }
 
-    //Отправить личное сообщение
-    @PostMapping(value = "/{id}/messages")
-    public boolean sendMessage(@PathVariable Long id, @RequestBody PrivateMessageDTO dto){
-        return privateMessagesServices.sendMessage(id, dto);
-    }
 
 
 

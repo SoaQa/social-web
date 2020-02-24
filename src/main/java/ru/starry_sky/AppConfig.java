@@ -34,6 +34,13 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    public WallMessageCommentDao wallMessageCommentDao(){
+        WallMessageCommentDao wallMessageCommentDao = new WallMessageCommentDaoImpl();
+        wallMessageCommentDao.setGenericClass(WallMessageComment.class);
+        return wallMessageCommentDao;
+    }
+
+    @Bean
     public WallMessagesDao wallMessagesDao(){
         WallMessagesDao wallMessagesDao = new WallMessagesDaoImpl();
         wallMessagesDao.setGenericClass(WallMessage.class);

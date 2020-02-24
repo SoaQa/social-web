@@ -13,4 +13,5 @@ public interface UserService {
     List<User> getUserFriends(Long id);
     User getUserByLogin(String login);
     boolean updateUserInfo(Long id, UpdateUserProfileDTO dto);
+    List<User> findUserByName(String name);
 }

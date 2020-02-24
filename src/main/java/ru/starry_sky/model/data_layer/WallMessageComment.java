@@ -38,12 +38,17 @@ public class WallMessageComment {
     private Long senderID;
 
     @Column(name = "message_body")
-    private String message_body;
+    private String messageBody;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="message_id", nullable=false, insertable = false, updatable = false)
     private WallMessage wallMessage;
+
+    @PrePersist
+    private void preInsert(){
+        if (getSendTime() == null){setSendTime(LocalDateTime.now());}
+    }
 
 
 }

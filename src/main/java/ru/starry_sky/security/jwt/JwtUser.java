@@ -34,6 +34,11 @@ public class JwtUser implements UserDetails {
         return id;
     }
 
+    @JsonIgnore
+    public String getEmail(){
+        return email;
+    }
+
     @Override
     public String getPassword() {
         return password;

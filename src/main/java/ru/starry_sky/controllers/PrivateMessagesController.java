@@ -17,11 +17,13 @@ public class PrivateMessagesController {
     @Autowired
     private PrivateMessagesServices privateMessagesServices;
 
-    @PostMapping
+    /*@PostMapping
     public boolean sendMessage(@RequestBody PrivateMessageDTO dto){
         return privateMessagesServices.sendMessage(dto);
     }
 
+
+     */
     @GetMapping
     public List<PrivateMessage> getMessages(){
         return privateMessagesServices.getMessages();

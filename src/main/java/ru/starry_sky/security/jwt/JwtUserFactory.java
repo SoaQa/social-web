@@ -23,7 +23,7 @@ public final class JwtUserFactory {
                 mapToGrantedAuthorities(new ArrayList<>(user.getRoles()))
         );
     }
-
+  
     private static List<GrantedAuthority> mapToGrantedAuthorities(List<Role> roles){
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))

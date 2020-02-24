@@ -14,9 +14,9 @@ public class PrivateMessagesServicesImpl implements PrivateMessagesServices {
     @Autowired
     private PrivateMessagesDao privateMessagesDao;
 
-    public boolean sendMessage(PrivateMessageDTO dto){
+    public boolean sendMessage(Long senderID, PrivateMessageDTO dto){
         PrivateMessage privateMessage = new PrivateMessage();
-        privateMessage.setSenderID(dto.getSenderID());
+        privateMessage.setSenderID(senderID);
         privateMessage.setRecipientID(dto.getRecipientID());
         privateMessage.setMessageBody(dto.getMessageBody());
         privateMessagesDao.save(privateMessage);
@@ -25,5 +25,9 @@ public class PrivateMessagesServicesImpl implements PrivateMessagesServices {
 
     public List<PrivateMessage> getMessages(){
         return privateMessagesDao.getAllData();
+    }
+
+    public List<PrivateMessage> getUserMessages(Long id){
+        return privateMessagesDao.getUserMessages(id);
     }
 }

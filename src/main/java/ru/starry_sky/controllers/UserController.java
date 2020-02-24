@@ -5,10 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.starry_sky.model.data_layer.PrivateMessage;
 import ru.starry_sky.model.data_layer.User;
 import ru.starry_sky.model.data_layer.embedded_keys.FriendsPK;
 import ru.starry_sky.model.domain_layer.NewUser;
+import ru.starry_sky.model.domain_layer.PrivateMessageDTO;
 import ru.starry_sky.services.interfaces.FriendsServices;
+import ru.starry_sky.services.interfaces.PrivateMessagesServices;
 import ru.starry_sky.services.interfaces.UserService;
 
 import java.util.List;
@@ -23,21 +26,14 @@ public class UserController {
     @Autowired
     private FriendsServices friendsServices;
 
+    @Autowired
+    private PrivateMessagesServices privateMessagesServices;
+
     @GetMapping
     public List<User> getUsers(){
         return userService.getUsers();
     }
 
-    @PostMapping
-    public ResponseEntity createUser(@RequestBody NewUser newUser){
-        System.out.println(newUser);
-        if (userService.createUser(newUser)){
-            return ResponseEntity.ok("User created!");
-        }
-        else{
-           return (ResponseEntity) ResponseEntity.status(422);
-        }
-    }
 
     @GetMapping(value = "/{id}")
     public User getUser(@PathVariable Long id){
@@ -50,14 +46,23 @@ public class UserController {
         return userService.getUserFriends(id);
     }
 
-    //@PostMapping(value = "/friends")
-    //public boolean friendRequest(@RequestBody FriendsPK friendsPK){
-       // return friendsServices.friendRequest(friendsPK);
-  // }
 
     @PutMapping(value = "/friends/accept")
     boolean acceptFriendship(@RequestBody FriendsPK friendsPK){
        return friendsServices.acceptFriendship(friendsPK);
+    }
+
+
+
+    // Приватные сообщения
+    @GetMapping(value = "/{id}/messages")
+    public List<PrivateMessage> getPrivateMessages(@PathVariable Long id){
+        return privateMessagesServices.getUserMessages(id);
+    }
+
+    @PostMapping(value = "/{id}/messages")
+    public boolean sendMessage(@PathVariable Long id, @RequestBody PrivateMessageDTO dto){
+        return privateMessagesServices.sendMessage(id, dto);
     }
 
 }

@@ -6,6 +6,7 @@ import ru.starry_sky.model.domain_layer.PrivateMessageDTO;
 import java.util.List;
 
 public interface PrivateMessagesServices {
-    boolean sendMessage(PrivateMessageDTO dto);
+    boolean sendMessage(Long senderID, PrivateMessageDTO dto);
     List<PrivateMessage> getMessages();
+    List<PrivateMessage> getUserMessages(Long id);
 }

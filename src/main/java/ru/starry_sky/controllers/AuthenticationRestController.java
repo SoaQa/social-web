@@ -10,10 +10,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import ru.starry_sky.model.data_layer.User;
-import ru.starry_sky.model.domain_layer.AuthenticatedRequestDTO;
+import ru.starry_sky.model.domain_layer.NewUser;
 import ru.starry_sky.security.jwt.JwtTokenProvider;
 import ru.starry_sky.services.interfaces.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,8 +33,6 @@ public class AuthenticationRestController {
 
     @GetMapping(value = "/login")
     public ResponseEntity login(@RequestParam String login, @RequestParam String password){
-        //String login = "Kostik";
-        //String password = "6666666";
         try{
 
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, password));
@@ -55,4 +54,40 @@ public class AuthenticationRestController {
         }
     }
 
+    @PostMapping(value = "/login")
+    public @ResponseBody String saveProfileJson(HttpServletRequest request){
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        try{
+
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, password));
+            User user = userService.getUserByLogin(login);
+            if (user == null){
+                throw new UsernameNotFoundException("User with login: " + login + " not found!");
+            }
+
+            String token = jwtTokenProvider.createToken(login, user.getRoles());
+            Map<Object, Object> response = new HashMap<>();
+            response.put("login", login);
+            response.put("token", token);
+            return token;
+
+        }catch (AuthenticationServiceException e){
+            log.warn("Incorrect login or password. Login: {}, Password {}",
+                    login, password);
+            throw new BadCredentialsException("Invalid login or password!");
+        }
+    }
+
+
+    @PostMapping(value = "/register")
+    public ResponseEntity createUser(@RequestBody NewUser newUser){
+        System.out.println(newUser);
+        if (userService.createUser(newUser)){
+            return ResponseEntity.ok("User registered!");
+        }
+        else{
+            return (ResponseEntity) ResponseEntity.status(422);
+        }
+    }
 }

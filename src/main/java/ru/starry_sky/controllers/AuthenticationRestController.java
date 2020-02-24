@@ -31,31 +31,9 @@ public class AuthenticationRestController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/login")
-    public ResponseEntity login(@RequestParam String login, @RequestParam String password){
-        try{
-
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, password));
-            User user = userService.getUserByLogin(login);
-            if (user == null){
-                throw new UsernameNotFoundException("User with login: " + login + " not found!");
-            }
-
-            String token = jwtTokenProvider.createToken(login, user.getRoles());
-            Map<Object, Object> response = new HashMap<>();
-            response.put("login", login);
-            response.put("token", token);
-            return ResponseEntity.ok(response);
-
-        }catch (AuthenticationServiceException e){
-            log.warn("Incorrect login or password. Login: {}, Password {}",
-                    login, password);
-            throw new BadCredentialsException("Invalid login or password!");
-        }
-    }
 
     @PostMapping(value = "/login")
-    public @ResponseBody String saveProfileJson(HttpServletRequest request){
+    public @ResponseBody ResponseEntity saveProfileJson(HttpServletRequest request){
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         try{
@@ -70,7 +48,7 @@ public class AuthenticationRestController {
             Map<Object, Object> response = new HashMap<>();
             response.put("login", login);
             response.put("token", token);
-            return token;
+            return ResponseEntity.ok(response);
 
         }catch (AuthenticationServiceException e){
             log.warn("Incorrect login or password. Login: {}, Password {}",

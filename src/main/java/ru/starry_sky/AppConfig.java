@@ -27,13 +27,6 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public FriendsDao friendsDaoImpl(){
-        FriendsDao friendsDao = new FriendsDaoImpl();
-        friendsDao.setGenericClass(Friendship.class);
-        return friendsDao;
-    }
-
-    @Bean
     public PrivateMessagesDao privateMessagesDao(){
         PrivateMessagesDao privateMessagesDao = new PrivateMessagesDaoImpl();
         privateMessagesDao.setGenericClass(PrivateMessage.class);

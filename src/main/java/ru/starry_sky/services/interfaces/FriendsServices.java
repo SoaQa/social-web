@@ -6,5 +6,5 @@ import java.util.Set;
 
 public interface FriendsServices {
     boolean friendRequest(FriendsPK friendsPK);
-    boolean acceptFriendship(FriendsPK friendsPK);
+    boolean acceptFriendship(boolean accept, FriendsPK friendsPK);
 }

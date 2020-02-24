@@ -1,5 +1,6 @@
 package ru.starry_sky.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import ru.starry_sky.dao.interfases.UserDao;
 import ru.starry_sky.model.data_layer.Role;
 import ru.starry_sky.model.data_layer.User;
 import ru.starry_sky.model.domain_layer.NewUser;
+import ru.starry_sky.model.domain_layer.UpdateUserProfileDTO;
 import ru.starry_sky.services.interfaces.UserService;
 import ru.starry_sky.utils.enums.Status;
 
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
@@ -60,6 +63,32 @@ public class UserServiceImpl implements UserService {
 
     public User getUserByLogin(String login){
         return userDao.getUserByLogin(login);
+    }
+
+    public boolean updateUserInfo(Long id, UpdateUserProfileDTO dto){
+        try {
+            User user = userDao.getByID(id);
+            if (dto.getBirthDate() != null){
+                user.setBirthDate(dto.getBirthDate());
+            }
+
+            if (dto.getGender() != null){
+                user.setGender(dto.getGender());
+            }
+
+            if (dto.getName() != null){
+                user.setName(dto.getName());
+            }
+
+            if (dto.getSurname() != null){
+                user.setSurname(dto.getSurname());
+            }
+            userDao.merge(user);
+            return true;
+        }catch (Exception e){
+            log.error("Error when updating user.", e);
+            return false;
+        }
     }
 
 }

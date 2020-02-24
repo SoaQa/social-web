@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.starry_sky.model.data_layer.Community;
 import ru.starry_sky.model.domain_layer.CreateCommunityDTO;
-import ru.starry_sky.model.domain_layer.UserCommunityDTO;
 import ru.starry_sky.services.interfaces.CommunitiesServices;
 
 import java.util.List;

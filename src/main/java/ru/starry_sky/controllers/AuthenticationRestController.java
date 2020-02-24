@@ -16,8 +16,6 @@ import ru.starry_sky.security.jwt.JwtTokenProvider;
 import ru.starry_sky.services.interfaces.UserService;
 import ru.starry_sky.utils.enums.valid.ValidationUtils;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;

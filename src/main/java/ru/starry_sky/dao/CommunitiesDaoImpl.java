@@ -3,8 +3,8 @@ package ru.starry_sky.dao;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import ru.starry_sky.dao.interfases.CommunitiesDao;
-import ru.starry_sky.model.data_layer.CommunityID;
 import ru.starry_sky.model.data_layer.Community;
+import ru.starry_sky.model.data_layer.CommunityID;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

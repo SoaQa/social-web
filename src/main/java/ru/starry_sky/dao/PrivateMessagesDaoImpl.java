@@ -2,10 +2,8 @@ package ru.starry_sky.dao;
 
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
 import ru.starry_sky.dao.interfases.PrivateMessagesDao;
 import ru.starry_sky.model.data_layer.PrivateMessage;
-import ru.starry_sky.model.data_layer.User;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

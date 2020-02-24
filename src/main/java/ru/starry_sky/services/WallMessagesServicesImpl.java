@@ -3,7 +3,6 @@ package ru.starry_sky.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.starry_sky.dao.WallMessagesDaoImpl;
 import ru.starry_sky.dao.interfases.WallMessageCommentDao;
 import ru.starry_sky.dao.interfases.WallMessagesDao;
 import ru.starry_sky.model.data_layer.WallMessage;

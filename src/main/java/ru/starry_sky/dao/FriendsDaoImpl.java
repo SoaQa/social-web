@@ -4,11 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import ru.starry_sky.dao.interfases.FriendsDao;
 import ru.starry_sky.model.data_layer.Friendship;
-import ru.starry_sky.model.data_layer.PrivateMessage;
 import ru.starry_sky.model.data_layer.UserID;
 import ru.starry_sky.model.data_layer.embedded_keys.FriendsPK;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

@@ -1,10 +1,8 @@
 package ru.starry_sky.dao;
 
 import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
 import ru.starry_sky.dao.interfases.RoleDao;
 import ru.starry_sky.model.data_layer.Role;
-
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

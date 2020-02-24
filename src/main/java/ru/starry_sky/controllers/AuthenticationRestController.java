@@ -2,6 +2,7 @@ package ru.starry_sky.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -13,7 +14,10 @@ import ru.starry_sky.model.data_layer.User;
 import ru.starry_sky.model.domain_layer.NewUser;
 import ru.starry_sky.security.jwt.JwtTokenProvider;
 import ru.starry_sky.services.interfaces.UserService;
+import ru.starry_sky.utils.enums.valid.ValidationUtils;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,6 +65,12 @@ public class AuthenticationRestController {
     @PostMapping(value = "/register")
     public ResponseEntity createUser(@RequestBody NewUser newUser){
         System.out.println(newUser);
+        if (!ValidationUtils.isValidEmailAddress(newUser.getEmail())){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Bad email address");
+        }
+
         if (userService.createUser(newUser)){
             return ResponseEntity.ok("User registered!");
         }

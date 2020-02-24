@@ -3,6 +3,7 @@ package ru.starry_sky.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.starry_sky.model.data_layer.User;
 import ru.starry_sky.model.data_layer.embedded_keys.FriendsPK;
@@ -28,8 +29,14 @@ public class UserController {
     }
 
     @PostMapping
-    public boolean createUser(@RequestBody NewUser newUser){
-        return userService.createUser(newUser);
+    public ResponseEntity createUser(@RequestBody NewUser newUser){
+        System.out.println(newUser);
+        if (userService.createUser(newUser)){
+            return ResponseEntity.ok("User created!");
+        }
+        else{
+           return (ResponseEntity) ResponseEntity.status(422);
+        }
     }
 
     @GetMapping(value = "/{id}")

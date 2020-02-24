@@ -99,7 +99,7 @@ public class User {
     @JsonManagedReference
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "user_communities",
+            name = "users_communities",
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "community_id") }
     )

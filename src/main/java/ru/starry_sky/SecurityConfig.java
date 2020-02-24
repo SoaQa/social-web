@@ -25,11 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    private final static String ADMIN_ENDPOINT = "/starry_sky/admin/**";
+    private final static String ADMIN_ENDPOINT = "/admin/**";
 
-    private final static String USER_ENDPOINT = "/starry_sky/users/**";
+    private final static String USER_ENDPOINT = "/users/**";
 
-    private final static String LOGIN_ENDPOINT = "/starry_sky/login/**";
+    private final static String LOGIN_ENDPOINT = "/login/**";
 
 
     @Bean

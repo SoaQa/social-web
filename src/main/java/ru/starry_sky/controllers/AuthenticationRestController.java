@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/starry_sky/")
+@RequestMapping
 @Slf4j
 public class AuthenticationRestController {
     @Autowired
@@ -30,11 +30,13 @@ public class AuthenticationRestController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "login")
-    public ResponseEntity login(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
+    @GetMapping(value = "/login")
+    public ResponseEntity login(@RequestParam String login, @RequestParam String password){
+        //String login = "Kostik";
+        //String password = "6666666";
         try{
-            String login = authenticatedRequestDTO.getLogin();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, authenticatedRequestDTO.getPassword()));
+
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, password));
             User user = userService.getUserByLogin(login);
             if (user == null){
                 throw new UsernameNotFoundException("User with login: " + login + " not found!");
@@ -48,8 +50,9 @@ public class AuthenticationRestController {
 
         }catch (AuthenticationServiceException e){
             log.warn("Incorrect login or password. Login: {}, Password {}",
-                    authenticatedRequestDTO.getLogin(), authenticatedRequestDTO.getPassword());
+                    login, password);
             throw new BadCredentialsException("Invalid login or password!");
         }
     }
+
 }

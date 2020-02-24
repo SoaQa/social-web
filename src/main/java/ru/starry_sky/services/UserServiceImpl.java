@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     public boolean createUser(NewUser newUser){
         User user = new User();
         List<Role> roles = new ArrayList<>();
-        Role role = roleDao.getRoleByName("user");
+        Role role = roleDao.getRoleByName("ROLE_USER");
         roles.add(role);
 
         user.setLogin(newUser.getLogin());

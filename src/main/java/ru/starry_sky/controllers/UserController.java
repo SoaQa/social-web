@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
+import ru.starry_sky.model.data_layer.Friendship;
 import ru.starry_sky.model.data_layer.PrivateMessage;
 import ru.starry_sky.model.data_layer.User;
 import ru.starry_sky.model.data_layer.embedded_keys.FriendsPK;
@@ -44,18 +45,34 @@ public class UserController {
         return userService.getUsers();
     }
 
+   // Основные запросы для юзера
 
+    // получить юзера по id
     @GetMapping(value = "/{id}")
     public User getUser(@PathVariable Long id){
         return userService.getUser(id);
     }
 
+    // Обновить данные пользователя
+    @PutMapping(value = "/{id}")
+    public ResponseEntity updateUserInfo(@PathVariable Long id, @RequestBody UpdateUserProfileDTO dto){
+        if (userService.updateUserInfo(id, dto)){
+            return ResponseEntity.ok(id);
+        }else {
+            throw new BadCredentialsException("updateUserInfo bad request");
+        }
 
+    }
+
+    // Дружба
+
+    // Друзья пользователя
     @GetMapping(value = "/{id}/friends")
     public List<User> getUserFriends(@PathVariable Long id){
         return userService.getUserFriends(id);
     }
 
+    // Создание запроса на дружбу
     @PostMapping(value = "/{requester}/friends")
     public ResponseEntity friendsRequest(@PathVariable Long requester, @RequestBody LongID id){
         FriendsPK friendsPK = new FriendsPK();
@@ -71,6 +88,7 @@ public class UserController {
 
     }
 
+    // Подверждение или отклонение дружбы
     @PutMapping(value = "/{friend}/friends")
     public ResponseEntity acceptFriendship(@PathVariable Long friend, @RequestBody AcceptFriendshipDTO dto){
         FriendsPK friendsPK = new FriendsPK();
@@ -85,16 +103,13 @@ public class UserController {
        }
     }
 
-
-    @PutMapping(value = "/{id}")
-    public ResponseEntity updateUserInfo(@PathVariable Long id, @RequestBody UpdateUserProfileDTO dto){
-        if (userService.updateUserInfo(id, dto)){
-            return ResponseEntity.ok(id);
-        }else {
-            throw new BadCredentialsException("updateUserInfo bad request");
-        }
-
+    @GetMapping(value = "/{id}/friend-requests")
+    public List<Friendship> getUnacceptedFriendships(Long id,@RequestParam(defaultValue = "my") String ex){
+        return friendsServices.getUnacceptedFriendships(id, ex);
     }
+
+
+
 
     // Приватные сообщения
 

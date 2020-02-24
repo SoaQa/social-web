@@ -9,6 +9,8 @@ import ru.starry_sky.model.data_layer.Friendship;
 import ru.starry_sky.model.data_layer.embedded_keys.FriendsPK;
 import ru.starry_sky.services.interfaces.FriendsServices;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class FriendsServicesImpl implements FriendsServices {
@@ -31,6 +33,10 @@ public class FriendsServicesImpl implements FriendsServices {
             friendsDao.removeByID(friendsPK);
         }
         return true;
+    }
+
+    public List<Friendship> getUnacceptedFriendships(Long userID, String ex){
+        return friendsDao.getUnacceptedFriendships(userID, ex);
     }
 
 

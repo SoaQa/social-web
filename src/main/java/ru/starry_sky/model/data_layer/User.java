@@ -1,6 +1,7 @@
 package ru.starry_sky.model.data_layer;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -35,6 +36,7 @@ public class User {
     @Column(nullable = false)
     private String login;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
@@ -66,7 +68,7 @@ public class User {
     }
 
     // ниже идут связи для хибернейта
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "user_roles",
@@ -75,28 +77,27 @@ public class User {
     )
     private List<Role> roles;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "sender",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PrivateMessage> sentOutPrivateMessages;
 
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "recipient",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PrivateMessage> receivedPrivateMessages;
 
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "sender",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<WallMessage> sentOutWallMessages;
 
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "recipient",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<WallMessage> receivedWallMessages;
 
 
-
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "users_communities",
@@ -106,8 +107,8 @@ public class User {
     private List<Community> communities;
 
 
-    @JsonBackReference
-    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "friendship",
             joinColumns = { @JoinColumn(name = "requester") },
@@ -115,7 +116,7 @@ public class User {
     )
     private List<User> requester;
 
-   @JsonManagedReference
+    @JsonIgnore
     @ManyToMany(cascade = { CascadeType.ALL }, mappedBy = "requester")
     private List<User> friend;
 

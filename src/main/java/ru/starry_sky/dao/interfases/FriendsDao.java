@@ -8,5 +8,5 @@ import java.util.Set;
 
 public interface FriendsDao extends GenericDao<Friendship, FriendsPK> {
     Set<Long> getFriendsIDSetByUserID(Long userID);
-    List<Friendship> getUnacceptedFriendships(Long userID,  String ex);
+    List<Friendship> getUnacceptedFriendships(Long userID);
 }

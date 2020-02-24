@@ -35,8 +35,8 @@ public class FriendsServicesImpl implements FriendsServices {
         return true;
     }
 
-    public List<Friendship> getUnacceptedFriendships(Long userID, String ex){
-        return friendsDao.getUnacceptedFriendships(userID, ex);
+    public List<Friendship> getUnacceptedFriendships(Long userID){
+        return friendsDao.getUnacceptedFriendships(userID);
     }
 
 

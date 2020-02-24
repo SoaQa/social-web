@@ -9,5 +9,5 @@ import java.util.Set;
 public interface FriendsServices {
     boolean friendRequest(FriendsPK friendsPK);
     boolean acceptFriendship(boolean accept, FriendsPK friendsPK);
-    List<Friendship> getUnacceptedFriendships(Long userID, String ex);
+    List<Friendship> getUnacceptedFriendships(Long userID);
 }

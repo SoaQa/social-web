@@ -24,7 +24,6 @@ import java.util.List;
 /**
  * Контроллер пользователя
  * основной контроллер приложения
- * осуществялет взаимодействие пользователей: дружбу, обмен сообщениями
  */
 
 @Slf4j
@@ -33,9 +32,6 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private FriendsServices friendsServices;
 
     @Autowired
     private PrivateMessagesServices privateMessagesServices;
@@ -63,52 +59,6 @@ public class UserController {
         }
 
     }
-
-    // Дружба
-
-    // Друзья пользователя
-    @GetMapping(value = "/{id}/friends")
-    public List<User> getUserFriends(@PathVariable Long id){
-        return userService.getUserFriends(id);
-    }
-
-    // Создание запроса на дружбу
-    @PostMapping(value = "/{requester}/friends")
-    public ResponseEntity friendsRequest(@PathVariable Long requester, @RequestBody LongID id){
-        FriendsPK friendsPK = new FriendsPK();
-        friendsPK.setRequester(requester);
-        friendsPK.setFriend(id.getId());
-        if(friendsServices.friendRequest(friendsPK)){
-            return ResponseEntity.ok("Friends requested");
-        }else{
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("request not send.");
-        }
-
-    }
-
-    // Подверждение или отклонение дружбы
-    @PutMapping(value = "/{friend}/friends")
-    public ResponseEntity acceptFriendship(@PathVariable Long friend, @RequestBody AcceptFriendshipDTO dto){
-        FriendsPK friendsPK = new FriendsPK();
-        friendsPK.setRequester(dto.getRequester());
-        friendsPK.setFriend(friend);
-       if(friendsServices.acceptFriendship(dto.isAccept() ,friendsPK)){
-           return ResponseEntity.ok("Friends accept or decline");
-       }else{
-           return ResponseEntity
-                   .status(HttpStatus.BAD_REQUEST)
-                   .body("Friends not accept.");
-       }
-    }
-
-    @GetMapping(value = "/{id}/friend-requests")
-    public List<Friendship> getUnacceptedFriendships(Long id,@RequestParam(defaultValue = "my") String ex){
-        return friendsServices.getUnacceptedFriendships(id, ex);
-    }
-
-
 
 
     // Приватные сообщения

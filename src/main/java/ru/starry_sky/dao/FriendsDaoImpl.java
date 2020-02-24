@@ -33,22 +33,15 @@ public class FriendsDaoImpl extends GenericAbstractDaoImpl<Friendship, FriendsPK
         return users;
     }
 
-    public List<Friendship> getUnacceptedFriendships(Long userID, String ex){
+    public List<Friendship> getUnacceptedFriendships(Long userID){
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Friendship> cq = cb.createQuery(Friendship.class);
 
         Root<Friendship> root = cq.from(Friendship.class);
         Predicate predicateForFriendship;
-
-        // Если нужны запросы мне то я друг, если мои запросы то я реквестер
-        if (ex.equals("me")){
-            predicateForFriendship
-                = cb.equal(root.get("friend"), userID);
-        }else {
-            predicateForFriendship
-                    = cb.equal(root.get("requester"), userID);
-        }
+        predicateForFriendship
+                = cb.equal(root.get("id").get("requester"), userID);
         Predicate predicateForAccept
                 = cb.equal(root.get("accept"), false);
         Predicate predicate

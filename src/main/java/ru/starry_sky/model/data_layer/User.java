@@ -98,10 +98,7 @@ public class User {
 
 
     @JsonIgnore
-    @ManyToMany(cascade = {CascadeType.PERSIST,
-            CascadeType.DETACH,
-            CascadeType.REFRESH,
-            CascadeType.REMOVE})
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "users_communities",
             joinColumns = { @JoinColumn(name = "user_id") },

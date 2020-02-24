@@ -15,4 +15,6 @@ public interface UserService {
     boolean updateUserInfo(Long id, UpdateUserProfileDTO dto);
     List<User> findUserByName(String name);
     boolean inToCommunity(Long userID, Long communityID);
+    boolean deleteFriend(Long userID, Long friendID);
+    boolean disActive(Long id);
 }

@@ -67,5 +67,16 @@ public class UserFriendsController {
         return friendsServices.getUnacceptedFriendships(id);
     }
 
+    @DeleteMapping(value = "/{userID}/friends")
+    public ResponseEntity deleteFriend(@PathVariable Long userID, @RequestParam Long id){
+        if(userService.deleteFriend(userID, id)){
+            return ResponseEntity.ok("Friend deleted");
+        }else{
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Friend not deleted");
+        }
+    }
+
 
 }

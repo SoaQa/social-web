@@ -9,8 +9,10 @@ import ru.starry_sky.dao.interfases.FriendsDao;
 import ru.starry_sky.dao.interfases.RoleDao;
 import ru.starry_sky.dao.interfases.UserDao;
 import ru.starry_sky.model.data_layer.Community;
+import ru.starry_sky.model.data_layer.Friendship;
 import ru.starry_sky.model.data_layer.Role;
 import ru.starry_sky.model.data_layer.User;
+import ru.starry_sky.model.data_layer.embedded_keys.FriendsPK;
 import ru.starry_sky.model.domain_layer.NewUser;
 import ru.starry_sky.model.domain_layer.UpdateUserProfileDTO;
 import ru.starry_sky.services.interfaces.UserService;
@@ -110,4 +112,32 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    public boolean deleteFriend(Long userID, Long friendID){
+        Friendship friendship;
+        friendship = friendsDao.getByID(new FriendsPK(userID, friendID));
+
+        if (friendship == null){
+            friendship = friendsDao.getByID(new FriendsPK(friendID, userID));
+        }
+
+        if (friendship != null){
+            friendsDao.removeByID(friendship.getId());
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    public boolean disActive(Long id){
+        User user = userDao.getByID(id);
+        if (user != null){
+            user.setStatus(Status.NOT_ACTIVE);
+            userDao.merge(user);
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

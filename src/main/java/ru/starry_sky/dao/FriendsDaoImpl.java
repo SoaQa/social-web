@@ -8,10 +8,7 @@ import ru.starry_sky.model.data_layer.PrivateMessage;
 import ru.starry_sky.model.data_layer.UserID;
 import ru.starry_sky.model.data_layer.embedded_keys.FriendsPK;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,4 +47,37 @@ public class FriendsDaoImpl extends GenericAbstractDaoImpl<Friendship, FriendsPK
         return session.createQuery(cq).getResultList();
 
     }
+/*
+    public boolean deleteFriendship(Long userID, Long friendID){
+        Session session = sessionFactory.openSession();
+
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+
+        // create delete
+        CriteriaDelete<Friendship> delete = cb.
+                createCriteriaDelete(Friendship.class);
+
+        // set the root class
+        Root<Friendship> root = delete.from(Friendship.class);
+
+        Predicate userRequesterPredicate = cb.equal(root.get("id").get("requester"), userID);
+        Predicate userFriendPredicate = cb.equal(root.get("id").get("friend"), userID);
+
+        Predicate user = cb.or(userRequesterPredicate, userFriendPredicate);
+
+        Predicate friendRequesterPredicate = cb.equal(root.get("id").get("requester"), friendID);
+        Predicate friendFriendPredicate = cb.equal(root.get("id").get("friend"), friendID);
+
+        Predicate friend = cb.or(friendRequesterPredicate, friendFriendPredicate);
+
+        // set where clause
+        delete.where();
+
+        // perform update
+        session.createQuery(delete).executeUpdate();
+    }
+
+
+ */
+
 }

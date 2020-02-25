@@ -1,10 +1,12 @@
 package ru.starry_sky.dao;
 
+import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import ru.starry_sky.dao.interfases.UserDao;
 import ru.starry_sky.model.data_layer.User;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -32,7 +34,14 @@ public class UserDaoImpl extends GenericAbstractDaoImpl<User, Long> implements U
 
         Root<User> root = cq.from(User.class);
         cq.select(root).where(cb.equal(root.get("login"), login));
-        return session.createQuery(cq).getSingleResult();
+        try {
+            return session.createQuery(cq).getSingleResult();
+        }catch (NoResultException e){
+            log.warn("User with login {} not found!", login);
+            return null;
+        }
+
+
     }
 
     public List<User> findUserByName(String name){

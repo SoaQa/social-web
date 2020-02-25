@@ -1,9 +1,10 @@
-package ru.starry_sky;
+package config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -11,8 +12,16 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import ru.starry_sky.dao.FriendsDaoImpl;
+import ru.starry_sky.dao.UserDaoImpl;
+import ru.starry_sky.dao.interfases.FriendsDao;
+import ru.starry_sky.dao.interfases.UserDao;
+import ru.starry_sky.model.data_layer.Friendship;
+import ru.starry_sky.model.data_layer.User;
 
 import javax.sql.DataSource;
+import java.util.Locale;
 import java.util.Properties;
 
 /**
@@ -21,11 +30,42 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @PropertySource(value = { "classpath:application.properties" })
-public class HibernateConfig implements TransactionManagementConfigurer {
+public class TestConfig implements TransactionManagementConfigurer {
 
     @Autowired
     private Environment environment;
 
+    @Bean
+    public UserDao userDaoImpl(){
+        UserDao userDao = new UserDaoImpl();
+        userDao.setGenericClass(User.class);
+        return userDao;
+    }
+
+    //Message Source config
+    @Bean
+    public ReloadableResourceBundleMessageSource messageSource(){
+
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("/resources/messages");
+        messageSource.setUseCodeAsDefaultMessage(false);
+        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setCacheSeconds(-1);
+        return messageSource;
+    }
+
+    @Bean
+    public SessionLocaleResolver localeResolver(){
+        SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+        localeResolver.setDefaultLocale(new Locale("ru"));
+        return localeResolver;
+    }
+    @Bean
+    public FriendsDao friendsDao(){
+        FriendsDao friendsDao = new FriendsDaoImpl();
+        friendsDao.setGenericClass(Friendship.class);
+        return friendsDao;
+    }
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -67,4 +107,5 @@ public class HibernateConfig implements TransactionManagementConfigurer {
     }
 
 }
+
 

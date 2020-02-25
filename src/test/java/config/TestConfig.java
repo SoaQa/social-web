@@ -47,7 +47,7 @@ public class TestConfig implements TransactionManagementConfigurer {
     public ReloadableResourceBundleMessageSource messageSource(){
 
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("/resources/messages");
+        messageSource.setBasename("messages");
         messageSource.setUseCodeAsDefaultMessage(false);
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setCacheSeconds(-1);

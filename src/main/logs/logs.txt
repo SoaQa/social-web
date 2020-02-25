@@ -498,3 +498,7 @@
 2020-02-25 18:51:22 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
 2020-02-25 18:51:23 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL9Dialect
 2020-02-25 18:51:27 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-02-25 18:53:40 INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-02-25 18:53:41 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-02-25 18:53:41 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL9Dialect
+2020-02-25 18:53:46 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]

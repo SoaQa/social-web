@@ -1,4 +1,4 @@
-package ru.starry_sky.utils.enums.valid;
+package ru.starry_sky.utils.valid;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;

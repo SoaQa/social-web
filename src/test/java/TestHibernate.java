@@ -58,12 +58,12 @@ public class TestHibernate {
     @Test
     public void beginAndDeclineFriendship(){
         User requester = new User();
-        requester.setEmail("test@ru.ru");
+        requester.setEmail("teeee1st@ru.ru");
         requester.setLogin("test1");
         requester.setPassword("test");
 
         User friend = new User();
-        friend.setEmail("test@ru.ru");
+        friend.setEmail("teeeee1st@ru.ru");
         friend.setLogin("test2");
         friend.setPassword("test");
 

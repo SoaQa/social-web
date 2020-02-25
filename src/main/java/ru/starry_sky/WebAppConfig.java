@@ -71,15 +71,12 @@ public class WebAppConfig implements WebMvcConfigurer {
         return communitiesDao;
     }
 
-
-    //Message Source config
     @Bean
     public ReloadableResourceBundleMessageSource messageSource(){
-
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("/resources/locales/message");
+        messageSource.setBasename("/WEB-INF/messages");
         messageSource.setUseCodeAsDefaultMessage(false);
-        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setDefaultEncoding("cp1251");
         messageSource.setCacheSeconds(-1);
         return messageSource;
     }

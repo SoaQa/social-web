@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Locale;
+import static org.junit.Assert.*;
 
 public class TestLocale {
     @Autowired
@@ -20,6 +21,8 @@ public class TestLocale {
 
     @Test
     public void testLocale(){
-        System.out.println(messageSource.getMessage("userCreated", null, new Locale("ru", "Ru")));
+        assertEquals(messageSource.getMessage("userCreated", new Object[] {"test"}, new Locale("en", "Us")), "User test registered!");
+        assertEquals(messageSource.getMessage("userCreated", new Object[] {"test"}, new Locale("de", "Gr")), "Benutzer test registriert!");
+        assertEquals(messageSource.getMessage("userCreated", new Object[] {"test"}, new Locale("ru")), "Пользователь test зарегистрирован");
     }
 }

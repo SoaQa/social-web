@@ -45,11 +45,10 @@ public class TestConfig implements TransactionManagementConfigurer {
     //Message Source config
     @Bean
     public ReloadableResourceBundleMessageSource messageSource(){
-
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("messages");
         messageSource.setUseCodeAsDefaultMessage(false);
-        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setDefaultEncoding("cp1251");
         messageSource.setCacheSeconds(-1);
         return messageSource;
     }
@@ -60,6 +59,7 @@ public class TestConfig implements TransactionManagementConfigurer {
         localeResolver.setDefaultLocale(new Locale("ru"));
         return localeResolver;
     }
+
     @Bean
     public FriendsDao friendsDao(){
         FriendsDao friendsDao = new FriendsDaoImpl();

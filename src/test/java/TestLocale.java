@@ -7,7 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.util.Locale;
 
-public class TestServices {
+public class TestLocale {
     @Autowired
     private MessageSource messageSource;
 

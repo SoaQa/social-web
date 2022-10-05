@@ -14,7 +14,7 @@
 		<spring.security>5.2.2.RELEASE</spring.security>
 		<cglib.version>3.3.0</cglib.version>
 		<log4jVersion>1.2.17</log4jVersion>
-		<jacksonVesion>2.10.1</jacksonVesion>
+		<jacksonVesion>2.12.6.1</jacksonVesion>
 	</properties>
 
 
